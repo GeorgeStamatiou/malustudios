@@ -21,20 +21,26 @@
         <li><a href="contact.html" class="active">Contact</a></li>
       </ul>
     </nav>
+    <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
   </header>
 
   <!-- PAGE CONTENT -->
-  <section class="section">
-    <h1>About Malu Studios</h1>
-    <p>
-      We’re a creative web design agency that turns ideas into clean, modern
-      digital experiences. Our focus is simple — craft design that performs.
-    </p>
+<section class="section">
+    <h1>Let’s Create Something Great</h1><br>
+    <p>We’d love to hear about your next project. Drop us a message below and we’ll get back to you soon!</p><br>
+
+    <form action="https://formspree.io/f/mjkbjkdd" method="POST" class="contact-form">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
   </section>
 
   <!-- FOOTER -->
   <footer>
     <p>© 2025 Malu Studios. Crafted with ❤️ in South Africa.</p>
   </footer>
+  <script src="script.js"></script>
 </body>
 </html>

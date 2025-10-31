@@ -1,1 +1,6 @@
-console.log("Malu Studios site loaded 🚀");
+const menuToggle = document.querySelector(".menu-toggle");
+const nav = document.querySelector(".navbar nav");
+
+menuToggle.addEventListener("click", () => {
+  nav.classList.toggle("show");
+});
