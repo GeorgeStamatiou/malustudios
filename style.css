@@ -5,6 +5,10 @@
   scroll-behavior: smooth;
 }
 
+html {
+  overflow-y: scroll;
+}
+
 body {
   font-family: 'Montserrat', sans-serif;
   color: #222;
@@ -38,13 +42,19 @@ body {
 .navbar ul {
   list-style: none;
   display: flex;
-  gap: 1.5rem;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.5rem; /* controls spacing between buttons */
+  margin: 0;
+  padding: 0;
 }
 
 .navbar a {
   text-decoration: none;
   color: #222;
   font-weight: 600;
+  display: inline-block;
+  padding: 0.25rem 0;
   transition: color 0.3s;
 }
 
@@ -183,3 +193,11 @@ footer {
   background: #f7f7f7;
   font-size: 0.9rem;
 }
+
+.navbar a.active {
+  color: #ff4d5a;
+  text-decoration: none;
+  border-bottom: 2px solid #ff4d5a;
+  padding-bottom: 0.25rem;
+}
+
