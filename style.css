@@ -34,6 +34,8 @@ body {
 .logo {
   font-weight: 700;
   font-size: 1.4rem;
+  color: inherit;
+  text-decoration: none;
 }
 
 .logo span {
@@ -186,7 +188,6 @@ body {
 }
 
 
-
 /* ========== PORTFOLIO ========== */
 .dark {
   background: #111;
@@ -200,43 +201,206 @@ body {
   flex-wrap: wrap;
 }
 
-.item {
+/* Project card container */
+.project {
   width: 250px;
-  height: 150px;
-  background: #ff4d5a;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 600;
-  color: white;
-  transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
-  cursor: pointer;
+  height: 180px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Hover effect for portfolio items */
-.item::after {
-  content: "";
+/* Overlay for text */
+.overlay {
   position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
-  transition: all 0.5s;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1.2rem;
+  text-align: center;
+  transition: background 0.4s ease, opacity 0.4s ease;
 }
 
-.item:hover::after {
-  left: 100%;
+/* Project heading and desc */
+.overlay h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
 }
 
-.item:hover {
-  transform: translateY(-8px) scale(1.03);
-  box-shadow: 0 8px 25px rgba(255, 77, 90, 0.4);
+.project-desc {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* CTA button inside project */
+.project-btn {
+  opacity: 0;
+  text-decoration: none;
+  background: #ff4d5a;
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  margin-top: 0.7rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background 0.3s, transform 0.3s, opacity 0.4s ease;
+}
+
+.project-btn:hover {
   background: #ff6f75;
+  transform: translateY(-2px);
 }
+
+/* Hover: card grows, overlay darkens, text/button appear */
+.project:hover {
+  transform: scale(1.08);
+  box-shadow: 0 10px 35px rgba(255, 77, 90, 0.45);
+}
+
+.project:hover .overlay {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.project:hover .project-desc,
+.project:hover .project-btn {
+  opacity: 1;
+  max-height: 100px;
+}
+
+.project.expanded {
+  transform: scale(1.08);
+  box-shadow: 0 10px 35px rgba(255, 77, 90, 0.45);
+}
+
+.project.expanded .overlay {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.project.expanded .project-desc,
+.project.expanded .project-btn {
+  opacity: 1;
+  max-height: 100px;
+}
+
+
+/* Smooth text fade */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.project-desc,
+.project-btn {
+  animation: fadeIn 0.6s ease;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+  .portfolio {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .project {
+    width: 80%;
+    height: 200px;
+  }
+
+  .project:hover {
+    transform: scale(1.05);
+  }
+}
+
+/* ========== PORTFOLIO PAGE ========== */
+.portfolio-page {
+  background: #fff;
+  color: #222;
+}
+
+.portfolio-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Each case block */
+.portfolio-case {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: all 0.4s ease;
+  cursor: pointer;
+  background: #fafafa;
+}
+
+.case-header {
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem;
+}
+
+.case-header h3 {
+  color: #fff;
+  font-size: 1.3rem;
+  background: rgba(0,0,0,0.5);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+.case-body {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  padding: 0 1.5rem;
+  transition: all 0.5s ease;
+  background: #fff;
+}
+
+.portfolio-case:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(255,77,90,0.2);
+}
+
+.portfolio-case:hover .case-body {
+  max-height: 400px;
+  padding: 1.5rem;
+  opacity: 1;
+}
+
+/* Tap-to-expand (mobile friendly) */
+.portfolio-case.expanded .case-body {
+  max-height: 400px;
+  padding: 1.5rem;
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
 
 
 /* ========== CONTACT FORM ========== */
@@ -393,6 +557,87 @@ footer {
   overflow: hidden;
   transition: all 0.2s ease-in-out;
 }
+
+/* ========== EXPANDING SERVICES SECTION ========== */
+.services-expand {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.service-block {
+  background: #f9f9f9;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
+
+.service-block h3 {
+  background: #ff4d5a;
+  color: white;
+  padding: 1.2rem 1.5rem;
+  font-size: 1.4rem;
+  margin: 0;
+  transition: all 0.3s ease;
+}
+
+.service-details {
+  max-height: 0;
+  overflow: hidden;
+  background: #fff;
+  color: #444;
+  padding: 0 1.5rem;
+  transition: all 0.5s ease;
+  opacity: 0;
+}
+
+.service-block:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(255, 77, 90, 0.15);
+}
+
+.service-block:hover h3 {
+  background: #ff6f75;
+}
+
+.service-block:hover .service-details {
+  max-height: 300px;
+  padding: 1.2rem 1.5rem;
+  opacity: 1;
+}
+
+.service-block.expanded .service-details {
+  max-height: 300px;
+  padding: 1.2rem 1.5rem;
+  opacity: 1;
+}
+
+.service-block.expanded h3 {
+  background: #ff6f75;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .service-block:hover .service-details {
+    max-height: 500px;
+  }
+}
+
+.service-details p {
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
 
 
 

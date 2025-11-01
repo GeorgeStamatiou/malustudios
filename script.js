@@ -71,4 +71,32 @@ document.addEventListener("DOMContentLoaded", () => {
   type();
 });
 
+// ===== MOBILE-FRIENDLY TOGGLE FOR SERVICES & PROJECTS =====
 
+// Helper function: toggles a CSS class on tap
+function toggleExpandOnTap(selector, activeClass = "active") {
+  const elements = document.querySelectorAll(selector);
+
+  elements.forEach((el) => {
+    el.addEventListener("click", () => {
+      // Close other active elements (optional, makes UX cleaner)
+      elements.forEach((other) => {
+        if (other !== el) other.classList.remove(activeClass);
+      });
+      el.classList.toggle(activeClass);
+    });
+  });
+}
+
+// Apply to your service blocks and project cards
+document.addEventListener("DOMContentLoaded", () => {
+  toggleExpandOnTap(".service-block", "expanded");
+  toggleExpandOnTap(".project", "expanded");
+  toggleExpandOnTap(".portfolio-case", "expanded");
+});
+
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".service-block, .project")) {
+    document.querySelectorAll(".expanded").forEach(el => el.classList.remove("expanded"));
+  }
+});
